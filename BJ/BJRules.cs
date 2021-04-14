@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BJ
 {
     public class BJRules : Rules
     {
-        const uint BLACK_JACK = 21;
+        private const uint BLACK_JACK = 21;
         public BJRules()
         {
         }
 
         public List<Player> GetWinners(Table table, CardDeck deck)
         {
-            List<Player> WinnersList = new List<Player>();
+            List<Player> WinnersList;
             FirstDeal(table, deck);
             WinnersList = BlackJackWinners(table);
             if (WinnersList.Count != 0)
@@ -36,7 +35,7 @@ namespace BJ
 
         private List<Player> BlackJackWinners(Table table)
         {
-            List<Player> WinnersList = new List<Player>();
+            List<Player> WinnersList = new();
             foreach (Player player in table.GetPlayers())
             {
                 if (player.GetHand().GetHandValue() == BLACK_JACK)
@@ -48,7 +47,7 @@ namespace BJ
         }
         private List<Player> EndGameWinners(Table table)
         {
-            List<Player> WinnersList = new List<Player>();
+            List<Player> WinnersList = new();
             uint bestHandValue = GetBestHandValue(table);
             foreach (Player player in table.GetPlayers())
             {

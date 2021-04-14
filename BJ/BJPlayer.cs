@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BJ
+﻿namespace BJ
 {
     public class BJPlayer : Player
     {
-        private string name;
-        private Hand hand;
-        private PlayerStrategy strategy;
+        private readonly string name;
+        private readonly Hand hand;
+        private readonly PlayerStrategy strategy;
 
         public BJPlayer(string _name, PlayerStrategy _strategy)
         {

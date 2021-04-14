@@ -1,10 +1,16 @@
-﻿using System;
-namespace BJ
+﻿namespace BJ
 {
-    public class BJSeventeenAndUpPlayerStategy
+    public class BJThresholdPlayerStategy : PlayerStrategy
     {
-        public BJSeventeenAndUpPlayerStategy()
+        private readonly uint threshold;
+        public BJThresholdPlayerStategy(uint _threshold)
         {
+            threshold = _threshold;
+        }
+
+        public bool IsWaitingForCard(Hand ownHand, Hand opponentHand)
+        {
+            return ownHand.GetHandValue() < threshold;
         }
     }
 }

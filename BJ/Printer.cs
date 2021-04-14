@@ -27,7 +27,7 @@ namespace BJ
                     winnersString = "Vinnere: " + winnersString;
                     foreach(Player player in Winners.GetRange(1, Winners.Count - 1))
                     {
-                        winnersString = winnersString + player.GetName();
+                        winnersString += player.GetName();
                     }
                 }
             }

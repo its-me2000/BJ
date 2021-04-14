@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BJ
 {
     public class NavCardDeck : CardDeck
     {
-        Queue<Card> deck;
+        private readonly Queue<Card> deck;
 
         public NavCardDeck()
         {
@@ -22,7 +21,7 @@ namespace BJ
 
             foreach (Card card in deck)
             {
-                returnString = returnString + card.ToString();
+                returnString += card.ToString();
             }
 
             return returnString;

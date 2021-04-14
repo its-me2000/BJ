@@ -5,7 +5,7 @@ namespace BJ
 {
     public class BJHand : Hand
     {
-        List<Card> hand;
+        private readonly List<Card> hand;
 
         public BJHand()
         {

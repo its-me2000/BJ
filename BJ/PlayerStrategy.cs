@@ -1,5 +1,4 @@
-﻿using System;
-namespace BJ
+﻿namespace BJ
 {
     public interface PlayerStrategy
     {

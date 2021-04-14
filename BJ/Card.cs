@@ -1,11 +1,10 @@
-﻿using System;
-namespace BJ
+﻿namespace BJ
 {
-    
+
     public class Card
     {
-        private CardSuit suit;
-        private CardValue value;
+        private readonly CardSuit suit;
+        private readonly CardValue value;
 
         public Card(CardSuit _suit, CardValue _value)
         {
@@ -19,7 +18,7 @@ namespace BJ
 
         public override string ToString()
         {
-            System.Text.Rune cardSymbol = new System.Text.Rune( ((uint)suit) | ((uint)value) );
+            System.Text.Rune cardSymbol = new( ((uint)suit) | ((uint)value) );
             return cardSymbol.ToString() ;
         }
     }

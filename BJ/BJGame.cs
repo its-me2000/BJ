@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BJ
 {
     public class BJGame : Game
     {
-        private Table table;
+        private readonly Table table;
         private CardDeck deck;
-        private Rules rules;
+        private readonly Rules rules;
 
         public BJGame(Table _table, CardDeck _deck, Rules _rules)
         {
