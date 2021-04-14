@@ -35,7 +35,7 @@ namespace BJ
 
         private List<Player> BlackJackWinners(Table table)
         {
-            List<Player> WinnersList = new();
+            List<Player> WinnersList = new List<Player>();
             foreach (Player player in table.GetPlayers())
             {
                 if (player.GetHand().GetHandValue() == BLACK_JACK)
@@ -47,7 +47,7 @@ namespace BJ
         }
         private List<Player> EndGameWinners(Table table)
         {
-            List<Player> WinnersList = new();
+            List<Player> WinnersList = new List<Player>();
             uint bestHandValue = GetBestHandValue(table);
             foreach (Player player in table.GetPlayers())
             {
