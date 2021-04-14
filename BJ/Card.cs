@@ -49,6 +49,9 @@ namespace BJ
         {
             if (runesString)
             {
+                /*
+                 * Here can we return unicode characters of cards
+                 */
                 System.Text.Rune cardSymbol = new System.Text.Rune(((uint)suit) | ((uint)value));
                 return cardSymbol.ToString();
             }
