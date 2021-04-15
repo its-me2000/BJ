@@ -8,33 +8,23 @@ namespace BJ
         private readonly CardSuit suit;
         private readonly CardValue value;
         private bool runesString;
-        private Dictionary<CardValue, string> CardValueStrings;
-        private Dictionary<CardSuit, string> CardSuitStrings;
+        private static readonly Dictionary<CardValue, string> CardValueStrings = new Dictionary<CardValue, string>()
+        {
+            { CardValue.TWO, "2" }, { CardValue.THREE, "3" }, { CardValue.FOUR,  "4" }, { CardValue.FIVE, "5" },
+            { CardValue.SIX, "6" }, { CardValue.SEVEN, "7" }, { CardValue.EIGHT, "8" }, { CardValue.NINE, "9" },
+            { CardValue.TEN, "10"}, { CardValue.JACK,  "J" }, { CardValue.QUEEN, "Q" }, { CardValue.KING, "K" },
+            { CardValue.ACE, "A" }
+        };
+        private static readonly Dictionary<CardSuit, string> CardSuitStrings = new Dictionary<CardSuit, string>()
+        {
+            { CardSuit.CLUBS, "C" }, { CardSuit.DIAMONDS, "D" }, { CardSuit.HEARTS, "H" }, {CardSuit.SPADES, "S"} 
+        };
 
         public Card(CardSuit _suit, CardValue _value)
         {
             suit = _suit;
             value = _value;
             runesString = false;
-            CardValueStrings = new Dictionary<CardValue, string>(13);
-            CardValueStrings.Add(CardValue.TWO,"2");
-            CardValueStrings.Add(CardValue.THREE, "3");
-            CardValueStrings.Add(CardValue.FOUR, "4");
-            CardValueStrings.Add(CardValue.FIVE, "5");
-            CardValueStrings.Add(CardValue.SIX, "6");
-            CardValueStrings.Add(CardValue.SEVEN, "7");
-            CardValueStrings.Add(CardValue.EIGHT, "8");
-            CardValueStrings.Add(CardValue.NINE, "9");
-            CardValueStrings.Add(CardValue.TEN, "10");
-            CardValueStrings.Add(CardValue.JACK, "J");
-            CardValueStrings.Add(CardValue.QUEEN, "Q");
-            CardValueStrings.Add(CardValue.KING, "K");
-            CardValueStrings.Add(CardValue.ACE, "A");
-            CardSuitStrings = new Dictionary<CardSuit, string>(4);
-            CardSuitStrings.Add(CardSuit.CLUBS, "C");
-            CardSuitStrings.Add(CardSuit.DIAMONDS, "D");
-            CardSuitStrings.Add(CardSuit.HEARTS, "H");
-            CardSuitStrings.Add(CardSuit.SPADES, "S");
         }
 
         public void SetRunesString(bool _runesString) => runesString = _runesString;

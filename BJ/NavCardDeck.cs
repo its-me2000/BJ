@@ -8,6 +8,10 @@ namespace BJ
 
         public NavCardDeck()
         {
+            private class JsonObject
+        {
+
+        }
         }
 
         public Card GetCard()
