@@ -4,6 +4,6 @@ namespace BJ
 {
     public interface Rules
     {
-        List<Player> GetWinners(Table table, CardDeck deck);
+        public List<Player> GetWinners(Table table, CardDeck deck);
     }
 }

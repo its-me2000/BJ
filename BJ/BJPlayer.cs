@@ -1,4 +1,6 @@
-﻿namespace BJ
+﻿using System.Collections.Generic;
+
+namespace BJ
 {
     public class BJPlayer : Player
     {
@@ -28,9 +30,9 @@
             return name;
         }
 
-        public bool IsWaitingForCard(Hand opponentHand)
+        public bool IsWaitingForCard(List<Hand> opponentsHands)
         {
-            return strategy.IsWaitingForCard(hand, opponentHand);
+            return strategy.IsWaitingForCard(hand, opponentsHands);
         }
         public override string ToString()
         {

@@ -1,4 +1,6 @@
-﻿namespace BJ
+﻿using System.Collections.Generic;
+
+namespace BJ
 {
     public class BJDealerPlayerStrategy : PlayerStrategy
     {
@@ -7,9 +9,15 @@
         {
         }
 
-        public bool IsWaitingForCard(Hand ownHand, Hand opponentHand)
+        public bool IsWaitingForCard(Hand ownHand, List<Hand> opponentsHands)
         {
-            return ownHand.GetHandValue() <= opponentHand.GetHandValue()
+            uint bestOpponentsHandValue = 0;
+            opponentsHands.ForEach( (hand) => {
+                if (hand.GetHandValue() > bestOpponentsHandValue && hand.GetHandValue() <= BLACK_JACK)
+                    bestOpponentsHandValue = hand.GetHandValue();
+            });
+
+            return ownHand.GetHandValue() <= bestOpponentsHandValue
                 && ownHand.GetHandValue() < BLACK_JACK;
         }
     }

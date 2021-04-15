@@ -1,4 +1,6 @@
-﻿namespace BJ
+﻿using System.Collections.Generic;
+
+namespace BJ
 {
     public class BJThresholdPlayerStategy : PlayerStrategy
     {
@@ -8,7 +10,7 @@
             threshold = _threshold;
         }
 
-        public bool IsWaitingForCard(Hand ownHand, Hand opponentHand)
+        public bool IsWaitingForCard(Hand ownHand, List<Hand> opponentsHands)
         {
             return ownHand.GetHandValue() < threshold;
         }

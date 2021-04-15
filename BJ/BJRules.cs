@@ -35,20 +35,17 @@ namespace BJ
 
         private List<Player> BlackJackWinners(Table table)
         {
-            List<Player> WinnersList = new List<Player>();
-            foreach (Player player in table.GetPlayers())
-            {
-                if (player.GetHand().GetHandValue() == BLACK_JACK)
-                {
-                    WinnersList.Add(player);
-                }
-            }
-            return WinnersList;
+            return CheckForWinners(table, BLACK_JACK);
         }
+
         private List<Player> EndGameWinners(Table table)
         {
+            return CheckForWinners(table, GetBestHandValue(table));
+        }
+
+        private List<Player> CheckForWinners(Table table, uint bestHandValue)
+        {
             List<Player> WinnersList = new List<Player>();
-            uint bestHandValue = GetBestHandValue(table);
             foreach (Player player in table.GetPlayers())
             {
                 if (player.GetHand().GetHandValue() == bestHandValue)
@@ -62,7 +59,7 @@ namespace BJ
         {
             foreach (Player player in table.GetPlayers())
             {
-                while (player.IsWaitingForCard(GetBestOtherPlayersHand(table,player)))
+                while (player.IsWaitingForCard(GetOpponentsHands(table,player)))
                 {
                     player.TakeCard(deck.GetCard());
                     //TODO: empty deck case
@@ -70,22 +67,17 @@ namespace BJ
             }
         }
 
-        private Hand GetBestOtherPlayersHand(Table table, Player selfPlayer)
+        private List<Hand> GetOpponentsHands(Table table, Player selfPlayer)
         {
-            Hand bestHand = new BJHand();
-            uint bestHandValue = 0;
+            List<Hand> opponentsHands = new List<Hand>();
             foreach (Player player in table.GetPlayers())
-            {
-                uint playerHandValue = player.GetHand().GetHandValue();
-                if((player != selfPlayer)
-                    && (playerHandValue <= 21)
-                    && (playerHandValue > bestHandValue))
+            { 
+                if(player != selfPlayer)
                 {
-                    bestHandValue = playerHandValue;
-                    bestHand = player.GetHand();
+                    opponentsHands.Add(player.GetHand());
                 }
             }
-            return bestHand;
+            return opponentsHands;
         }
         private uint GetBestHandValue(Table table)
         {
@@ -93,7 +85,7 @@ namespace BJ
             foreach (Player player in table.GetPlayers())
             {
                 uint playerHandValue = player.GetHand().GetHandValue();
-                if ((playerHandValue <= 21)
+                if ((playerHandValue <= BLACK_JACK)
                     && (playerHandValue > bestHandValue))
                 {
                     bestHandValue = playerHandValue;
