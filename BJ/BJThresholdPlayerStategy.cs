@@ -2,10 +2,10 @@
 
 namespace BJ
 {
-    public class BJThresholdPlayerStategy : PlayerStrategy
+    public class BJThresholdPlayerStrategy : PlayerStrategy
     {
         private readonly uint threshold;
-        public BJThresholdPlayerStategy(uint _threshold)
+        public BJThresholdPlayerStrategy(uint _threshold)
         {
             threshold = _threshold;
         }
