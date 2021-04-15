@@ -5,7 +5,8 @@ namespace BJ
 {
     public class DefaultCardDeck : CardDeck
     {
-        private readonly Queue<Card> deck;
+        private Queue<Card> deck;
+        private bool shuffled;
         private static List<Card> defaultDeck = new List<Card>
         {
         new Card(CardSuit.HEARTS, CardValue.TWO),
@@ -62,28 +63,18 @@ namespace BJ
         new Card(CardSuit.SPADES, CardValue.ACE)
         };
 
-        public DefaultCardDeck(bool shuffled)
+        public DefaultCardDeck(bool _shuffled)
         {
-            if (shuffled)
-            {
-                deck = new Queue<Card>();
-                Random random = new Random();
-                List<Card> tempDeck = new List<Card>(defaultDeck);
-                while(tempDeck.Count > 0)
-                {
-                    int r = random.Next(tempDeck.Count - 1);
-                    deck.Enqueue(tempDeck[r]);
-                    tempDeck.RemoveAt(r);
-                }
-            }
-            else
-            {
-                deck = new Queue<Card>(defaultDeck);
-            }
+            shuffled = _shuffled;
+            GetNewDeck();
         }
 
         public Card GetCard()
         {
+            if (deck.Count == 0)
+            {
+                GetNewDeck();
+            }
             return deck.Dequeue();
         }
 
@@ -98,5 +89,26 @@ namespace BJ
 
             return returnString;
         }
+
+        private void GetNewDeck()
+        {
+            if (shuffled)
+            {
+                deck = new Queue<Card>();
+                Random random = new Random();
+                List<Card> tempDeck = new List<Card>(defaultDeck);
+                while (tempDeck.Count > 0)
+                {
+                    int r = random.Next(tempDeck.Count - 1);
+                    deck.Enqueue(tempDeck[r]);
+                    tempDeck.RemoveAt(r);
+                }
+            }
+            else
+            {
+                deck = new Queue<Card>(defaultDeck);
+            }
+        }
+
     }
 }

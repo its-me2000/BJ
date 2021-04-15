@@ -8,7 +8,7 @@ namespace BJ
 {
     public class NavCardDeck : CardDeck
     {
-        private readonly Queue<Card> deck;
+        private readonly Queue<Card> deck = new Queue<Card>();
         private const int CARDS_IN_DECK = 52;
         private const string navDeckUrl = "http://nav-deckofcards.herokuapp.com/shuffle";
         static private readonly HttpClient client = new HttpClient();
@@ -41,25 +41,11 @@ namespace BJ
         
         public NavCardDeck()
         {
-            try
-            {
-                deck = JsonObjectListToQueue(DeserializeJsonObjectList(GetJsonString(navDeckUrl)));
-                if(deck.Count != CARDS_IN_DECK)
-                {
-                    throw new Exception("Bad Deck.");
-                }
-            }
-            catch( Exception e )
-            {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("NavCardDeck. Message :{0} ", e.Message);
-                Console.ReadKey(true);
-                throw e;
-            }
+            GetNewDeck();
 
         }
 
-        private static string GetJsonString(string url)
+        private string GetJsonString(string url)
         {
             try
             {
@@ -68,12 +54,12 @@ namespace BJ
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("GetJsonString. Message :{0} ", e.Message);
+                Console.WriteLine("Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
         }
-        private static List<JsonObject> DeserializeJsonObjectList(string jsonString)
+        private List<JsonObject> DeserializeJsonObjectList(string jsonString)
         {
             try
             {
@@ -82,25 +68,43 @@ namespace BJ
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("DeserializeJsonObject. Message :{0} ", e.Message);
+                Console.WriteLine("Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
         }
-        private static Queue<Card> JsonObjectListToQueue(List<JsonObject> jsonList)
+        private void JsonObjectListToQueue(List<JsonObject> jsonList)
         {
             try
             {
                 Queue<Card> queue = new Queue<Card>();
                 jsonList.ForEach((obj)=>
-                    queue.Enqueue(new Card(StringToCardSuit[obj.suit], StringToCardValue[obj.value]))
+                    deck.Enqueue(new Card(StringToCardSuit[obj.suit], StringToCardValue[obj.value]))
                 );
-                return queue;
             }
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("JsonObjectListToQueue. Message :{0} ", e.Message);
+                Console.WriteLine("Message :{0} ", e.Message);
+
+                throw e;
+            }
+        }
+
+        private void GetNewDeck()
+        {
+            try
+            {
+                JsonObjectListToQueue(DeserializeJsonObjectList(GetJsonString(navDeckUrl)));
+                if (deck.Count != CARDS_IN_DECK)
+                {
+                    throw new Exception("Bad Deck.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
@@ -108,7 +112,12 @@ namespace BJ
 
         public Card GetCard()
         {
+            if (deck.Count == 0)
+            {
+                GetNewDeck();
+            }
             return deck.Dequeue();
+
         }
 
         public override string ToString()
