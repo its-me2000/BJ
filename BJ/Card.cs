@@ -25,9 +25,9 @@ namespace BJ
             value = _value;
         }
 
-        public CardSuit Suit { get; }
+        public CardSuit Suit() => suit;
 
-        public CardValue Value { get; }
+        public CardValue Value() => value;
 
         public override string ToString()
         {

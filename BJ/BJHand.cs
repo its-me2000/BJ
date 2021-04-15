@@ -16,7 +16,7 @@ namespace BJ
             uint handValue=0;
             foreach (Card card in hand)
             {
-                switch (card.Value)
+                switch (card.Value())
                 {
                     case CardValue.TWO: handValue += 2; break;
                     case CardValue.THREE: handValue += 3; break;
