@@ -12,6 +12,9 @@ namespace BJ
 
             Console.WriteLine(new NavCardDeck());
 
+            Console.WriteLine(new DefaultCardDeck(false));
+
+            Console.WriteLine(new DefaultCardDeck(true));
             Console.ReadKey(true);
         }
     }

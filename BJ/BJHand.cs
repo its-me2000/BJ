@@ -53,7 +53,7 @@ namespace BJ
 
             foreach(Card card in hand)
             {
-                returnString = returnString + " " + card.ToString();
+                returnString += (" " + card.ToString());
             }
 
             return returnString;

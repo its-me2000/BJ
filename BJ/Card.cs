@@ -7,7 +7,6 @@ namespace BJ
     {
         private readonly CardSuit suit;
         private readonly CardValue value;
-        private bool runesString;
         private static readonly Dictionary<CardValue, string> CardValueStrings = new Dictionary<CardValue, string>()
         {
             { CardValue.TWO, "2" }, { CardValue.THREE, "3" }, { CardValue.FOUR,  "4" }, { CardValue.FIVE, "5" },
@@ -24,12 +23,7 @@ namespace BJ
         {
             suit = _suit;
             value = _value;
-            runesString = false;
         }
-
-        public void SetRunesString(bool _runesString) => runesString = _runesString;
-
-        public bool IsRunesString() => runesString;
 
         public CardSuit Suit { get; }
 
@@ -37,18 +31,12 @@ namespace BJ
 
         public override string ToString()
         {
-            if (runesString)
-            {
-                /*
-                 * Here can we return unicode characters of cards
-                 */
-                System.Text.Rune cardSymbol = new System.Text.Rune(((uint)suit) | ((uint)value));
-                return cardSymbol.ToString();
-            }
-            else
-            {
-                return CardSuitStrings[suit] + CardValueStrings[value];
-            }
+            return CardSuitStrings[suit] + CardValueStrings[value];
+        }
+
+        public string ToRuneString()
+        {
+            return new System.Text.Rune(((uint)suit) | ((uint)value)).ToString();
         }
     }
 }
