@@ -10,6 +10,7 @@ namespace BJ
     {
         private readonly Queue<Card> deck;
         private const int CARDS_IN_DECK = 52;
+        private const string navDeckUrl = "http://nav-deckofcards.herokuapp.com/shuffle";
         static private readonly HttpClient client = new HttpClient();
         private static readonly Dictionary<string, CardValue> StringToCardValue = new Dictionary<string, CardValue>()
         {
@@ -33,11 +34,11 @@ namespace BJ
         }
 
         
-        public NavCardDeck(string url)
+        public NavCardDeck()
         {
             try
             {
-                deck = JsonObjectListToQueue(DeserializeJsonObjectList(GetJsonString(url)));
+                deck = JsonObjectListToQueue(DeserializeJsonObjectList(GetJsonString(navDeckUrl)));
                 if(deck.Count != CARDS_IN_DECK)
                 {
                     throw new Exception("Bad Deck.");
@@ -113,10 +114,10 @@ namespace BJ
 
             foreach (Card card in deck)
             {
-                returnString += card.ToString();
+                returnString += (" " + card.ToString());
             }
 
             return returnString;
-        }
+        } 
     }
 }
