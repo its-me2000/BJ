@@ -9,6 +9,9 @@ namespace BJ
             Console.WriteLine("Hello World!");
 
             Console.WriteLine(new Card(CardSuit.HEARTS, CardValue.ACE).ToString());
+
+            Console.WriteLine(new NavCardDeck());
+
             Console.ReadKey(true);
         }
     }

@@ -29,8 +29,13 @@ namespace BJ
 
         private class JsonObject
         {
-            public string suit;
-            public string value;
+            public string suit { get; set; }
+            public string value { get; set; }
+            public JsonObject() { }
+            public override string ToString()
+            {
+                return suit + value;
+            }
         }
 
         
@@ -47,7 +52,7 @@ namespace BJ
             catch( Exception e )
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                Console.WriteLine("NavCardDeck. Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
@@ -63,7 +68,7 @@ namespace BJ
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                Console.WriteLine("GetJsonString. Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
@@ -77,7 +82,7 @@ namespace BJ
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                Console.WriteLine("DeserializeJsonObject. Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
@@ -86,18 +91,16 @@ namespace BJ
         {
             try
             {
-
                 Queue<Card> queue = new Queue<Card>();
-                foreach (JsonObject obj in jsonList)
-                {
-                    queue.Enqueue(new Card(StringToCardSuit[obj.suit], StringToCardValue[obj.value]));
-                }
+                jsonList.ForEach((obj)=>
+                    queue.Enqueue(new Card(StringToCardSuit[obj.suit], StringToCardValue[obj.value]))
+                );
                 return queue;
             }
             catch (Exception e)
             {
                 Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                Console.WriteLine("JsonObjectListToQueue. Message :{0} ", e.Message);
                 Console.ReadKey(true);
                 throw e;
             }
