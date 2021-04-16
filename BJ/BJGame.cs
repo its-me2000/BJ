@@ -17,6 +17,7 @@ namespace BJ
 
         public List<Player> GetWinners()
         {
+            table.ResetHands();
             return rules.GetWinners(table, deck);
         }
 

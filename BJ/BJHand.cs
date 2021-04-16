@@ -13,6 +13,12 @@ namespace BJ
 
         public uint GetHandValue()
         {
+            /*
+             * Regn ut den samlede poengsummen til <hver> spiller
+             * Nummererte kort har poeng som angitt på kortet
+             * Knekt(J), Dronning(Q) og Konge(K) teller som 10 poeng
+             * Ess(A) teller som 11 poeng
+             */
             uint handValue=0;
             foreach (Card card in hand)
             {
@@ -47,6 +53,7 @@ namespace BJ
         {
             throw new NotImplementedException();
         }
+
         public override string ToString()
         {
             string returnString = "";
@@ -57,6 +64,11 @@ namespace BJ
             }
 
             return returnString;
+        }
+
+        public void ResetHand()
+        {
+            hand.Clear();
         }
 
     }
