@@ -4,6 +4,7 @@ namespace BJ
 {
     public interface Table
     {
-        List<Player> GetPlayers();
+        public List<Player> GetPlayers();
+        public void ResetHands();
     }
 }
