@@ -38,7 +38,7 @@ namespace BJ
                     case CardValue.KING: handValue += 10; break;
                     case CardValue.ACE: handValue += 11; break;
                     default:
-                        break;
+                        throw new System.ArgumentException("Bad card value");
                 }
             }
             return handValue;
