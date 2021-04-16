@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*
+ * Kortstokken finnes på http://nav-deckofcards.herokuapp.com/shuffle
+ * Formatet på kortstokken er en JSON-array med 52 elementer
+ * Hvert element er et objekt med egenskapene suit og value
+ * suit -> [HEARTS|DIAMONDS|SPADES|CLUBS]
+ * value -> [2|3|4|5|6|7|8|9|10|J|Q|K|A]
+ * Eksempel:
+ *     [
+ *         {"suit":"CLUBS","value":"K"},
+ *         {"suit":"HEARTS","value":"8"},
+ *         ...
+ *     ]
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
@@ -42,7 +56,6 @@ namespace BJ
         public NavCardDeck()
         {
             GetNewDeck();
-
         }
 
         private string GetJsonString(string url)
@@ -53,12 +66,10 @@ namespace BJ
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-                Console.ReadKey(true);
                 throw e;
             }
         }
+
         private List<JsonObject> DeserializeJsonObjectList(string jsonString)
         {
             try
@@ -67,12 +78,10 @@ namespace BJ
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-                Console.ReadKey(true);
                 throw e;
             }
         }
+
         private void JsonObjectListToQueue(List<JsonObject> jsonList)
         {
             try
@@ -84,9 +93,6 @@ namespace BJ
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-
                 throw e;
             }
         }
@@ -103,9 +109,6 @@ namespace BJ
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-                Console.ReadKey(true);
                 throw e;
             }
         }
