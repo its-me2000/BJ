@@ -24,5 +24,10 @@ namespace BJ
         {
             return players;
         }
+
+        public void ResetHands()
+        {
+            GetPlayers().ForEach((player) => player.GetHand().ResetHand()); ;
+        }
     }
 }
