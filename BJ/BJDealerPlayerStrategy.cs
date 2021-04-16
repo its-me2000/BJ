@@ -6,6 +6,9 @@
  * Remark:
  * Om dine poengsum er 20 eller 21 og Marits poengsum er 20 eller 21
  * det er ingen vits å trekke en kort til for henne.
+ * 
+ * Remark2:
+ * Dealer skal spille sist i rundet da strategien orienteres på beste hånd
  */
 
 using System.Collections.Generic;
