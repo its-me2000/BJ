@@ -7,6 +7,6 @@ namespace BJ
         void TakeCard(Card card);
         Hand GetHand();
         string GetName();
-        bool IsWaitingForCard(List<Hand> opponentsHands);
+        bool IsWaitingForCard(Table table);
     }
 }

@@ -30,9 +30,9 @@ namespace BJ
             return name;
         }
 
-        public bool IsWaitingForCard(List<Hand> opponentsHands)
+        public bool IsWaitingForCard(Table table)
         {
-            return strategy.IsWaitingForCard(hand, opponentsHands);
+            return strategy.IsWaitingForCard(this, table);
         }
         public override string ToString()
         {

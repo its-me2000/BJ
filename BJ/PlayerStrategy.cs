@@ -4,6 +4,6 @@ namespace BJ
 {
     public interface PlayerStrategy
     {
-        bool IsWaitingForCard(Hand ownHand, List<Hand> opponentHand);
+        bool IsWaitingForCard(Player selfPlayer, Table table);
     }
 }
