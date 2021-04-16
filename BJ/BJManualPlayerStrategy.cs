@@ -6,28 +6,29 @@ namespace BJ
     public class BJManualPlayerStrategy : PlayerStrategy
     {
         private const uint BLACK_JACK = 21;
-        public BJManualPlayerStrategy()
+        private Func<string, string, bool> userInterface;
+        public BJManualPlayerStrategy(Func<string, string, bool> _userInterface)
         {
+            userInterface = _userInterface;
         }
 
-        public bool IsWaitingForCard(Hand ownHand, List<Hand> opponentsHands)
+        public bool IsWaitingForCard(Player selfPlayer, Table table)
         {
-            if (ownHand.GetHandValue() >= BLACK_JACK) return false;
+            if (selfPlayer.GetHand().GetHandValue() >= BLACK_JACK) return false;
 
-            Console.WriteLine("\nMotspilleres kort:");
-            foreach (Hand hand in opponentsHands)
+            string opponentsData = "";
+            string ownData = "";
+
+            foreach (Player player in table.GetPlayers())
             {
-                Console.WriteLine("{0} | {1}",hand.GetHandValue(),hand.ToString());
+                if (player != selfPlayer)
+                {
+                    opponentsData += player.ToString() + "\n";
+                }
             }
-            Console.WriteLine("\nDine kort");
-            Console.WriteLine("{0} | {1}", ownHand.GetHandValue(), ownHand.ToString());
-            Console.WriteLine("\nEtt kort til? j/n");
-            ConsoleKey commandKey = Console.ReadKey(true).Key;
-            if( commandKey == ConsoleKey.J)
-            {
-                return true;
-            }
-            return false;
+            ownData = selfPlayer.ToString();
+
+            return userInterface(ownData, opponentsData);
         }
     }
 }
