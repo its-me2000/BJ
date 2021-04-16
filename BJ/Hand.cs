@@ -5,5 +5,6 @@
         uint GetHandValue();
         void TakeCard(Card card);
         Card ThrowCard(uint index);
+        void ResetHand();
     }
 }
