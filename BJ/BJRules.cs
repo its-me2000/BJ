@@ -12,12 +12,23 @@ namespace BJ
         public List<Player> GetWinners(Table table, CardDeck deck)
         {
             List<Player> WinnersList;
+            /*
+             * Hver spiller tar to kort hver fra toppen av en tilfeldig stokket kortstokk.
+             * Du tar de to første kortene, Marit tar de to neste
+             */
             FirstDeal(table, deck);
+            /*
+             * Regn ut om en av spillerene har 21 poeng - Blackjack - med deres 
+             * initielle kort, og dermed vinner runden.
+             */
             WinnersList = BlackJackWinners(table);
             if (WinnersList.Count != 0)
             {
                 return WinnersList;
             }
+            /*
+             * Hvis ingen har 21 poeng, skal spillerne trekke kort fra toppen av kortstokken
+             */
             DealRest(table, deck);
             WinnersList = EndGameWinners(table);
             return WinnersList;
@@ -29,12 +40,15 @@ namespace BJ
             {
                 player.TakeCard(deck.GetCard());
                 player.TakeCard(deck.GetCard());
-                //TODO: empty deck case
             }
         }
 
         private List<Player> BlackJackWinners(Table table)
         {
+            /*
+             * Regn ut om en av spillerene har 21 poeng - Blackjack - med deres 
+             * initielle kort, og dermed vinner runden.
+             */
             return CheckForWinners(table, BLACK_JACK);
         }
 
@@ -59,26 +73,13 @@ namespace BJ
         {
             foreach (Player player in table.GetPlayers())
             {
-                while (player.IsWaitingForCard(GetOpponentsHands(table,player)))
+                while (player.IsWaitingForCard(table))
                 {
                     player.TakeCard(deck.GetCard());
-                    //TODO: empty deck case
                 }
             }
         }
 
-        private List<Hand> GetOpponentsHands(Table table, Player selfPlayer)
-        {
-            List<Hand> opponentsHands = new List<Hand>();
-            foreach (Player player in table.GetPlayers())
-            { 
-                if(player != selfPlayer)
-                {
-                    opponentsHands.Add(player.GetHand());
-                }
-            }
-            return opponentsHands;
-        }
         private uint GetBestHandValue(Table table)
         {
             uint bestHandValue = 0;
